@@ -21,9 +21,8 @@ def main(stdscr):
     parser.add_argument('y_dim', type=int, help='The x dimension of the Etch-A-Sketch')
     args = parser.parse_args()
 
-    curses.noecho()
-    curses.cbreak()
     curses.curs_set(0)
+
     setup_stage(args, stdscr)
     (currx, curry) = (0,0)
     (xpos, ypos) = map_coords(currx, curry)
