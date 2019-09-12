@@ -1,9 +1,9 @@
 # Etch-A-Sketch Program
 
 To run etch-a-sketch:
-'''sh
-$ ./etch-asketch.py 8 8
-'''
+```sh
+$ ./etch-a-sketch.py 8 8
+```
 
 args:
     x-dim: number of columns
