@@ -16,9 +16,9 @@ def setup_stage(args, stdscr):
 
 
 def main(stdscr):
-    parser = argparse.ArgumentParser(description='Etch A Sketch configuration parser')
+    parser = argparse.ArgumentParser(description='Etch A Stetch configuration parser')
     parser.add_argument('x_dim', type=int, help='The x dimension of the Etch-A-Sketch')
-    parser.add_argument('y_dim', type=int, help='The x dimension of the Etch-A-Sketch')
+    parser.add_argument('y_dim', type=int, help='The y dimension of the Etch-A-Sketch')
     args = parser.parse_args()
 
     curses.curs_set(0)
@@ -70,10 +70,6 @@ def main(stdscr):
             (xpos, ypos) = map_coords(currx, curry)
             stdscr.addstr(xpos, ypos, 'X', curses.A_BLINK) 
             stdscr.refresh()
-
-    curses.nocbreak()
-    curses.echo()
-    curses.endwin()
 
 def map_coords(x, y, intro_len=4):
     real_x = intro_len + 2 + y
