@@ -1,5 +1,10 @@
 # Etch-A-Sketch Program
 
+## HW 1 items:
+I have done all six items in hw 6
+
+## Etch-A-Sketch usage
+
 To run etch-a-sketch:
 ```sh
 $ ./etch-a-sketch.py 8 8
