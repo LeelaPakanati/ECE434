@@ -15,4 +15,4 @@ def main():
    while True:
         toggle = !toggle
         GPIO.output(args.pin, toggle)
-        sleep(args.period)
+        sleep(args.period/2)
