@@ -2,18 +2,19 @@
 import argparse
 import curses
 import Adafruit_BBIO.GPIO as GPIO
+from time import sleep
 
-UP_PIN = ""
-DOWN_PIN = ""
-LEFT_PIN = ""
-RIGHT_PIN = ""
-CLEAR_PIN = ""
+UP_PIN = "P9_21"
+DOWN_PIN = "P9_13"
+LEFT_PIN = "P9_11"
+RIGHT_PIN = "P9_17"
+CLEAR_PIN = "P9_19"
 
-GPIO.setup(UP_PIN, GPIO.IN)
-GPIO.setup(DOWN_PIN, GPIO.IN)
-GPIO.setup(LEFT_PIN, GPIO.IN)
-GPIO.setup(RIGHT_PIN, GPIO.IN)
-GPIO.setup(CLEAR_PIN, GPIO.IN)
+GPIO.setup(UP_PIN, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+GPIO.setup(DOWN_PIN, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+GPIO.setup(LEFT_PIN, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+GPIO.setup(RIGHT_PIN, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+GPIO.setup(CLEAR_PIN, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 
 def setup_stage(args, stdscr):
     stdscr.addstr(0,0, "Welcome to Etch-A-Sketch | Contols:\n\tW-A-S-D to move cursor\n\tr to clear the screen\n\tq to quit\n\t")
@@ -59,6 +60,7 @@ def main(stdscr):
             (xpos, ypos) = map_coords(currx, curry)
             stdscr.addstr(xpos, ypos, 'X', curses.A_BLINK) 
             stdscr.refresh()
+            sleep(.3)
         if GPIO.input(RIGHT_PIN):
             stdscr.addstr(xpos, ypos, 'X')
             if currx != args.x_dim - 1:
@@ -66,6 +68,7 @@ def main(stdscr):
             (xpos, ypos) = map_coords(currx, curry)
             stdscr.addstr(xpos, ypos, 'X', curses.A_BLINK) 
             stdscr.refresh()
+            sleep(.3)
         if GPIO.input(UP_PIN):
             stdscr.addstr(xpos, ypos, 'X')
             if curry != 0:
@@ -73,6 +76,7 @@ def main(stdscr):
             (xpos, ypos) = map_coords(currx, curry)
             stdscr.addstr(xpos, ypos, 'X', curses.A_BLINK) 
             stdscr.refresh()
+            sleep(.3)
         if GPIO.input(LEFT_PIN):
             stdscr.addstr(xpos, ypos, 'X')
             if currx != 0:
@@ -80,6 +84,7 @@ def main(stdscr):
             (xpos, ypos) = map_coords(currx, curry)
             stdscr.addstr(xpos, ypos, 'X', curses.A_BLINK) 
             stdscr.refresh()
+            sleep(.3)
 
 def map_coords(x, y, intro_len=4):
     real_x = intro_len + 2 + y
