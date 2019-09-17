@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 # From http://wh1t3s.com/2009/05/14/reading-beagleboard-gpio/
 # Orginally /usr/bin/readgpio, Modified by Mark A. Yoder 20-Jul-2011
 #
@@ -47,14 +47,6 @@ while [ "1" = "1" ]; do
 
   # sleep for a while
   sleep $PERIOD
-
-  # wrap line every 72 samples
-  NEWLINE=`expr $NEWLINE + 1`
-  if [ "$NEWLINE" = "72" ]; then
-#    echo ""
-    NEWLINE=0
-  fi
-
 done
 
 cleanup # call the cleanup routine

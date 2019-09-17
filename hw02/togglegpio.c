@@ -17,7 +17,7 @@
 #include "gpio-utils.h"
 
 
-int keepgoing = 1
+int keepgoing = 1;
 /****************************************************************
  * signal_handler
  ****************************************************************/
@@ -36,8 +36,8 @@ int main(int argc, char** argv)
         //create a variable to store whether we are sending a '1' or a '0'
 	char set_value[5]; 
 	//Integer to keep track of whether we want on or off
-	int toggle = 0;
-	int onOffTime;	// Time in micro sec to keep the signal on/off
+        int onTime;
+        int offTime;
 	int gpio_fd;
 
 	if (argc < 3) {
@@ -59,7 +59,7 @@ int main(int argc, char** argv)
 		"*  Welcome to PIN Blink program  *\n"
 		"*  ....blinking gpio pin         *\n"
 		"*  ....period of %d us.........*\n"
-		"**********************************\n", 2*onOffTime);
+		"**********************************\n", onTime+offTime);
 
 	//Using sysfs we need to write the gpio number to /sys/class/gpio/export
 	//This will create the folder /sys/class/gpio/gpio60
@@ -76,12 +76,10 @@ int main(int argc, char** argv)
 	//Run an infinite loop - will require Ctrl-C to exit this program
 	while(keepgoing)
 	{
-		toggle = !toggle;
-		gpio_set_value(gpio, toggle);
-//		printf("...value set to %d...\n", toggle);
-
-		//Pause for a while
-		usleep(onOffTime);
+                gpio_set_value(gpio, 1);
+                usleep(onTime);
+		gpio_set_value(gpio, 0);
+                usleep(offTime);
 	}
 	gpio_fd_close(gpio_fd);
 	return 0;
