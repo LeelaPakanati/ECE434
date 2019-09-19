@@ -18,9 +18,5 @@ bus.write_byte_data(address, 2, 26)
 GPIO.setup(alert_pin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 GPIO.add_event_detect(alert_pin, GPIO.RISING, callback=read_temp)
 
-<<<<<<< HEAD
-while:
-=======
 while True:
->>>>>>> 44ea36bf703274857fa562bc831677f0a3604d54
     pass
