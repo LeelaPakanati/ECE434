@@ -9,5 +9,5 @@ while true; do
 temp0f=$(($(i2cget -y 2 0x48 00) * 9 / 5 + 32))
 temp1f=$(($(i2cget -y 2 0x49 00) * 9 / 5 + 32))
 
-echo "Sensor0: " $temp0f " | Sensor1: " $temp1f
+echo -ne "Sensor0: " $temp0f " | Sensor1: " $temp1f \\r
 done
