@@ -77,7 +77,7 @@ def main(stdscr):
             stdscr.addstr(xpos, ypos, 'X', curses.A_BLINK) 
             stdscr.refresh()
             sleep(.3)
-        if GPIO.input(LEFT_PIN):
+       if GPIO.input(LEFT_PIN):
             stdscr.addstr(xpos, ypos, 'X')
             if currx != 0:
                 currx -= 1
