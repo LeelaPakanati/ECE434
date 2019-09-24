@@ -14,3 +14,10 @@ etch_a_sketch.py is the python script for running etch-a-sketch with two input a
 
 the pinouts for etch_a_sketch are also available in the top of of the code
 
+
+## Prof. Yoder's comments
+
+Your numbers look good.
+etch-a-sketch looks good.
+
+Grade:  10/10

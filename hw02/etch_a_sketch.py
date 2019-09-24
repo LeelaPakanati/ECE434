@@ -71,6 +71,9 @@ def main(stdscr):
             (xpos, ypos) = map_coords(currx, curry)
             stdscr.addstr(xpos, ypos, 'X', curses.A_BLINK) 
         if GPIO.input(LEFT_PIN):
+            stdscr.refresh()
+            sleep(.3)
+       if GPIO.input(LEFT_PIN):
             stdscr.addstr(xpos, ypos, 'X')
             if currx != 0:
                 currx -= 1
