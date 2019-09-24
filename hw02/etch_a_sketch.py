@@ -17,7 +17,7 @@ GPIO.setup(RIGHT_PIN, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 GPIO.setup(CLEAR_PIN, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 
 def setup_stage(args, stdscr):
-    stdscr.addstr(0,0, "Welcome to Etch-A-Sketch | Contols:\n\tW-A-S-D to move cursor\n\tr to clear the screen\n\tq to quit\n\t")
+    stdscr.addstr(0,0, "Welcome to Etch-A-Sketch | Contols:\n\tButtons to move cursor\n\treset button to clear the screen\n\tC-c to quit\n\t")
     intro_len = 4
     
     x_axis = "  "
@@ -51,7 +51,6 @@ def main(stdscr):
             (currx, curry) = (0,0)
             (xpos, ypos) = map_coords(currx, curry)
             stdscr.addstr(xpos, ypos, 'X', curses.A_BLINK) 
-            stdscr.refresh()
 
         if GPIO.input(DOWN_PIN):
             stdscr.addstr(xpos, ypos, 'X')
@@ -59,32 +58,26 @@ def main(stdscr):
                 curry += 1
             (xpos, ypos) = map_coords(currx, curry)
             stdscr.addstr(xpos, ypos, 'X', curses.A_BLINK) 
-            stdscr.refresh()
-            sleep(.3)
         if GPIO.input(RIGHT_PIN):
             stdscr.addstr(xpos, ypos, 'X')
             if currx != args.x_dim - 1:
                 currx += 1
             (xpos, ypos) = map_coords(currx, curry)
             stdscr.addstr(xpos, ypos, 'X', curses.A_BLINK) 
-            stdscr.refresh()
-            sleep(.3)
         if GPIO.input(UP_PIN):
             stdscr.addstr(xpos, ypos, 'X')
             if curry != 0:
                 curry -= 1
             (xpos, ypos) = map_coords(currx, curry)
             stdscr.addstr(xpos, ypos, 'X', curses.A_BLINK) 
-            stdscr.refresh()
-            sleep(.3)
         if GPIO.input(LEFT_PIN):
             stdscr.addstr(xpos, ypos, 'X')
             if currx != 0:
                 currx -= 1
             (xpos, ypos) = map_coords(currx, curry)
             stdscr.addstr(xpos, ypos, 'X', curses.A_BLINK) 
-            stdscr.refresh()
-            sleep(.3)
+        stdscr.refresh()
+        sleep(.3)
 
 def map_coords(x, y, intro_len=4):
     real_x = intro_len + 2 + y

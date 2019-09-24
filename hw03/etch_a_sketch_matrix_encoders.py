@@ -1,33 +1,33 @@
 #!/usr/bin/env python3
 import curses
 import Adafruit_BBIO.GPIO as GPIO
-from Adafruit_BBIO.Encoder import RotaryEncoder, eQEP1
+from Adafruit_BBIO.Encoder import RotaryEncoder, eQEP1, eQEP2b
 import smbus
 from time import sleep
 from math import pow
+import os
 
-RIGHT_PIN = "P8_14"
-UP_PIN = "P8_12"
-LEFT_PIN = "P8_16"
-CLEAR_PIN = "P8_10"
-DOWN_PIN = "P8_18"
-
+os.system("config-pin P9_21 i2c") 
+os.system("config-pin P9_22 i2c") 
+os.system("config-pin P8_41 qep") 
+os.system("config-pin P8_42 qep") 
+os.system("config-pin P8_33 qep") 
+os.system("config-pin P8_35 qep") 
 matrix = 0x70
 bus = smbus.SMBus(2)
 bus.write_byte_data(matrix, 0x21, 0)
 bus.write_byte_data(matrix, 0x81, 0)
 bus.write_byte_data(matrix, 0xe7, 0)
 matrix_data = [0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00]
+temp_address = 0x48
 
-GPIO.setup(UP_PIN, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
-GPIO.setup(DOWN_PIN, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
-GPIO.setup(LEFT_PIN, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
-GPIO.setup(RIGHT_PIN, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
-GPIO.setup(CLEAR_PIN, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+yEncoder = RotaryEncoder(eQEP1)
+yEncoder.setAbsolute()
+yEncoder.enable()
+xEncoder = RotaryEncoder(eQEP2b)
+xEncoder.setAbsolute()
+xEncoder.enable()
 
-myEncoder = RotaryEncoder(eQEP1)
-myEncoder.setAbsolute()
-myEncoder.enable()
 
 x_dim = 8
 y_dim = 8
@@ -98,11 +98,20 @@ def move_right(ch):
     if currx != x_dim - 1:
         update('x', 1)
 
-GPIO.add_event_detect(UP_PIN, GPIO.RISING, callback=move_up, bouncetime=100)
-GPIO.add_event_detect(DOWN_PIN, GPIO.RISING, callback=move_down, bouncetime=100)
-GPIO.add_event_detect(LEFT_PIN, GPIO.RISING, callback=move_left, bouncetime=100)
-GPIO.add_event_detect(RIGHT_PIN, GPIO.RISING, callback=move_right, bouncetime=100)
-GPIO.add_event_detect(CLEAR_PIN, GPIO.RISING, callback=clear, bouncetime=100)
-
+curr_ency = yEncoder.position
+curr_encx = xEncoder.position
 while True:
-    pass
+    temp = bus.read_byte_data(temp_address, 0)
+    if(temp>26):
+        clear(0)
+    if yEncoder.position > curr_ency:
+        move_up(0)
+    elif yEncoder.position < curr_ency:
+        move_down(0)
+    if xEncoder.position > curr_encx:
+        move_right(0)
+    elif xEncoder.position < curr_encx:
+        move_left(0)
+    curr_ency = yEncoder.position
+    curr_encx = xEncoder.position
+    
