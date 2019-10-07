@@ -24,3 +24,8 @@
 | 0x4830_E000 | LCD Controller |
 
 
+## Prof. Yoder's comments
+
+Memory map is a good start, need to demo
+
+Grade:  2/10
