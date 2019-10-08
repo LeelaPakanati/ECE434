@@ -6,9 +6,10 @@
 2. Dependency = app.c  
 3. Command = compiler and assemble but do not link  
 
-Makefile made from excercise in ./make/
+Makefile made from excercise in ./make/  
 
-## Installing kernel Source
+## Installing kernel Source  
+I installed the kernel 5.4 using    
 
 
 
