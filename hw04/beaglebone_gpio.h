@@ -22,6 +22,7 @@
 #define USR3 (1<<24)
 #define BTN0 (1<<26)
 #define BTN1 (1<<12)
+#define GPIO1_07  (1<<7)
 #define GPIO_03  (1<<3)
 #define GPIO_07  (1<<7)
 #define GPIO_60  (1<<28)

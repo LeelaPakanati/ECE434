@@ -20,7 +20,7 @@ int main(int argc, char *argv[]) {
     volatile unsigned int *gpio_cleardataout_addr;
     unsigned int gpio_dir;
     
-    unsigned int gpio_pin = 1<<7;
+    unsigned int GPIO_60 = (1<<7);
 
     // Set the signal callback for Ctrl-C
     signal(SIGINT, signal_handler);
@@ -39,15 +39,15 @@ int main(int argc, char *argv[]) {
     }
 
     gpio_dir = *gpio_oe_addr;
-    gpio_dir &= ~gpio_pin;
+    gpio_dir &= ~GPIO_60;
     *gpio_oe_addr = gpio_dir;
 
-    printf("Start blinking LED USR3\n");
+    printf("Start blinking gpio1_7: P9_4\n");
     while(keepgoing) {
-        *gpio_setdataout_addr = gpio_pin;
-//        usleep(500);
-        *gpio_cleardataout_addr = gpio_pin;
-//       usleep(500);
+        *gpio_setdataout_addr = GPIO_60;
+        usleep(500);
+        *gpio_cleardataout_addr = GPIO_60;
+        usleep(500);
     }
 
     munmap((void *)gpio_addr, GPIO1_SIZE);

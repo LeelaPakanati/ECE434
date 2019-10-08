@@ -23,9 +23,25 @@
 | 0x481A_E000 | GPIO3          |
 | 0x4830_E000 | LCD Controller |
 
+## MMAP
 
-## Prof. Yoder's comments
+### gpioLED:
 
-Memory map is a good start, need to demo
+usage
 
-Grade:  2/10
+`./gpioLED`
+
+toggles leds USR2, USR3 by buttons on pins GPIO0_26 and GPIO1_12
+
+
+### toggleGPIO:
+
+usage
+
+`./toggleGPIO`
+
+toggles pin P9_4 as fast as possible
+
+
+
+

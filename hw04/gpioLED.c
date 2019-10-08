@@ -35,9 +35,6 @@ int main(int argc, char *argv[]) {
     gpio0_oe_addr           = gpio0_addr + GPIO_OE;
     gpio1_oe_addr           = gpio1_addr + GPIO_OE;
 
-    printf("%d", gpio0_addr);
-    printf("%d", gpio1_addr);
-
     if(gpio0_addr == MAP_FAILED) {
         printf("Unable to map GPIO_0\n");
         exit(1);
@@ -59,9 +56,11 @@ int main(int argc, char *argv[]) {
 
     gpio0_dir = *gpio0_oe_addr;
     gpio1_dir = *gpio1_oe_addr;
-    gpio0_dir &= ~(USR0|USR1|USR2|USR3);
+
+    gpio1_dir &= ~(USR0|USR1|USR2|USR3);
     gpio0_dir |= BTN0; 
     gpio1_dir |= BTN1; 
+
     *gpio0_oe_addr = gpio0_dir;
     *gpio1_oe_addr = gpio1_dir;
  
@@ -70,17 +69,17 @@ int main(int argc, char *argv[]) {
 
     while(keepgoing){
         if(*gpio0_datain & BTN0){
-            *gpio0_setdataout_addr   |= USR0;
+            *gpio1_setdataout_addr   |= USR2;
         } else{
-            *gpio0_cleardataout_addr  &= ~USR0;
+            *gpio1_cleardataout_addr  &= ~USR2;
         }
         if(*gpio1_datain & BTN1){
-            *gpio1_setdataout_addr   |= USR0;
+            *gpio1_setdataout_addr   |= USR3;
         } else{
-            *gpio1_cleardataout_addr  &= ~USR0;
+            *gpio1_cleardataout_addr  &= ~USR3;
         }
     }
-    munmap((void *)gpio0_addr, GPIO1_SIZE);
+    munmap((void *)gpio0_addr, GPIO0_SIZE);
     munmap((void *)gpio1_addr, GPIO1_SIZE);
     close(fd);
     return 0;
