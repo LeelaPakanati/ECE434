@@ -9,7 +9,7 @@
 Makefile made from excercise in ./make/  
 
 ## Installing kernel Source  
-I installed the kernel 5.4 using    
+I installed the kernel 4.14 using the tutorial
 
 
 
