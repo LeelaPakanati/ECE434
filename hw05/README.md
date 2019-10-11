@@ -48,6 +48,7 @@ File Structure:
 
 ### part 1:  
 Passing parameters to the kernel module will print w/ the inputs  
+This is the Minimal Device Driver  
 ```bash
 make  
 sudo insmod hello.ko  
@@ -57,7 +58,7 @@ dmesg -H | tail-2
 
 ### part 2:  
 This will take input from the user for module configuration  
-
+This is the aCharacterDevice  
 ```bash
 make
 sudo insmod ebbchar.ko
@@ -68,6 +69,7 @@ dmesg -H | tail -10
 
 ### part 3:  
 These commands will show that the module is working  
+This is the KernelGPIO  
 ```bash
 make
 sudo insmod gpio_test.ko
