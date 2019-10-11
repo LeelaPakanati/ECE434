@@ -25,3 +25,16 @@ Hello, World! Main is executing at 0x44a5ad
 This address (0xbec25b78) is in our stack frame  
 This address (0x45b010) is in our bss section  
 This lddress (0x45b008) is in our data section  
+
+## Kernel Modules  
+File Structure:
+
+
+### part 1:  
+
+```bash
+make  
+sudo insmod hello.ko  
+sudo rmmod hello.ko  
+dmesg -H | tail-2  
+```
