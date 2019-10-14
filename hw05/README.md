@@ -75,3 +75,9 @@ make
 sudo insmod gpio_test.ko
 tail -f /var/log/kern.log
 ```
+
+## Prof. Yoder's comments
+
+Looks good. 
+
+Grade:  10/10

@@ -46,3 +46,11 @@ toggles pin P9_4 as fast as possible
 
 ### Speed of toggling:
 The method has a lot less over head than the python or C library or the bash scripts we tested learler. It is able to toggle the LED w/ only a .6ms delay and can acheive a 20ms period at its fastest
+
+## Prof. Yoder's comments
+
+Looks good. I think the mmap toggling should be much faster.  
+Did you comment out the usleep()?
+
+Late:   -1
+Grade:  9/10
