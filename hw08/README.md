@@ -19,3 +19,10 @@ What will stop it?
 ```
 tee /sys/class/remoteproc/remoteproc#/state stop
 ```
+
+## Prof. Yoder's comments
+
+Looks good.
+
+Late: -1
+Grade:  9/10
